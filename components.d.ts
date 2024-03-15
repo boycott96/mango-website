@@ -7,6 +7,11 @@ export {}
 
 declare module 'vue' {
   export interface GlobalComponents {
+    ElCheckTag: typeof import('element-plus/es')['ElCheckTag']
+    ElContainer: typeof import('element-plus/es')['ElContainer']
+    ElHeader: typeof import('element-plus/es')['ElHeader']
+    ElInput: typeof import('element-plus/es')['ElInput']
+    ElMain: typeof import('element-plus/es')['ElMain']
     ElMenu: typeof import('element-plus/es')['ElMenu']
     LayoutPage: typeof import('./src/components/LayoutPage.vue')['default']
     MovieList: typeof import('./src/components/MovieList.vue')['default']
