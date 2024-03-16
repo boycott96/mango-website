@@ -1,5 +1,5 @@
 <template>
-  <el-container>
+  <el-container class="full-height">
     <el-header>
       <el-menu
         :default-active="activeIndex"
@@ -31,6 +31,15 @@
     <el-main>
       <RouterView />
     </el-main>
+    <el-footer class="footer">
+      <span>© 2024 larkdance.cn 版权所有</span>
+      <span>
+        ICP证:
+        <a href="https://beian.miit.gov.cn/" target="_blank"
+          >皖ICP备20002653号-2</a
+        >
+      </span>
+    </el-footer>
   </el-container>
 </template>
 
@@ -78,5 +87,15 @@ const searchFun = () => {
 }
 .flex-grow {
   flex-grow: 1;
+}
+.footer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 14px;
+  height: 48px;
+  span+span {
+    margin-left: 10px;
+  }
 }
 </style>
