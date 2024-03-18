@@ -13,14 +13,23 @@
       <el-table-column prop="resolution" label="分辨率" width="120" />
       <el-table-column label="预览" width="120">
         <template #default="scope">
-          <el-image :src="scope.row.thumbnail" />
+          <el-image
+            :src="scope.row.thumbnail"
+            :preview-src-list="[scope.row.path]"
+            preview-teleported
+            :zoom-rate="1.2"
+            :max-scale="7"
+            :min-scale="0.2"
+            :initial-index="4"
+            fit="cover"
+          />
         </template>
       </el-table-column>
 
       <el-table-column fixed="right" label="操作">
         <template #default>
-          <el-button link type="primary" size="small">Detail</el-button>
           <el-button link type="primary" size="small">编辑</el-button>
+          <el-button link type="danger" size="small">删除</el-button>
         </template>
       </el-table-column>
     </el-table>
