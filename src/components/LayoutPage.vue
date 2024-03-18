@@ -8,7 +8,7 @@
         :ellipsis="false"
         @select="handleSelect"
       >
-        <div class="logo" index="0">
+        <div class="logo" index="0" @click="homeClick">
           <img
             style="width: 100px"
             src="../assets/mango-logo.png"
@@ -16,7 +16,7 @@
           />
         </div>
         <div class="flex-grow" />
-        <div class="search">
+        <div class="search" v-if="false">
           <el-input
             v-model="searchValue"
             style="width: 240px"
@@ -28,11 +28,11 @@
         </div>
       </el-menu>
     </el-header>
-    <el-main>
+    <el-main class="view">
       <RouterView />
     </el-main>
     <el-footer class="footer">
-      <span>© 2024 larkdance.cn 版权所有</span>
+      <span>©2024 larkdance.cn</span>
       <span>
         ICP证:
         <a href="https://beian.miit.gov.cn/" target="_blank"
@@ -46,10 +46,16 @@
 <script lang="ts" setup>
 import { ref } from "vue";
 import { Search } from "@element-plus/icons-vue";
+import { useRouter } from "vue-router";
 
 const activeIndex = ref("1");
 const handleSelect = (key: string, keyPath: string[]) => {
   console.log(key, keyPath);
+};
+
+const router = useRouter();
+const homeClick = () => {
+  router.push("/home");
 };
 
 const searchValue = ref("");
@@ -88,13 +94,16 @@ const searchFun = () => {
 .flex-grow {
   flex-grow: 1;
 }
+.view {
+  height: 100vh;
+}
 .footer {
   display: flex;
   justify-content: center;
   align-items: center;
   font-size: 14px;
   height: 48px;
-  span+span {
+  span + span {
     margin-left: 10px;
   }
 }

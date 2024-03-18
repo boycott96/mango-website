@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import MovieList from "./components/MovieList.vue";
+import MovieList from "../components/MovieList.vue";
 const movieData = [
   {
     playUrl: "https://www.mythrillfiction.com/the-dark-rider",

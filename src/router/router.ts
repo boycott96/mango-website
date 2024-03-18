@@ -9,6 +9,11 @@ const routers = [
     component: () => import("../views/WallpaperPage.vue"),
   },
   {
+    path: "/wallpaper/:wallpaperId",
+    component: () => import("../views/WallpaperView.vue"),
+    props: true,
+  },
+  {
     path: "/GLg8YqDmDuP3QUSuqJUgu5gX4bGqg10w",
     component: () => import("../views/WallpaperLevel.vue"),
   },
