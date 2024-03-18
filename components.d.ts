@@ -19,6 +19,8 @@ declare module 'vue' {
     ElMenu: typeof import('element-plus/es')['ElMenu']
     ElPagination: typeof import('element-plus/es')['ElPagination']
     ElSkeleton: typeof import('element-plus/es')['ElSkeleton']
+    ElTable: typeof import('element-plus/es')['ElTable']
+    ElTableColumn: typeof import('element-plus/es')['ElTableColumn']
     LayoutPage: typeof import('./src/components/LayoutPage.vue')['default']
     MovieList: typeof import('./src/components/MovieList.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
