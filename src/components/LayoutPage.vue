@@ -30,16 +30,16 @@
     </el-header>
     <el-main class="view">
       <RouterView />
+      <div class="footer">
+        <span>©2024</span>
+        <span>
+          ICP证:
+          <a href="https://beian.miit.gov.cn/" target="_blank"
+            >皖ICP备20002653号-2</a
+          >
+        </span>
+      </div>
     </el-main>
-    <el-footer class="footer">
-      <span>©2024 larkdance.cn</span>
-      <span>
-        ICP证:
-        <a href="https://beian.miit.gov.cn/" target="_blank"
-          >皖ICP备20002653号-2</a
-        >
-      </span>
-    </el-footer>
   </el-container>
 </template>
 
@@ -96,13 +96,13 @@ const searchFun = () => {
 }
 .view {
   height: 100vh;
+  padding-bottom: 0;
 }
 .footer {
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  margin-top: 12px;
+  text-align: center;
   font-size: 14px;
-  height: 48px;
+  height: 32px;
   span + span {
     margin-left: 10px;
   }

@@ -9,7 +9,7 @@ defineProps({
 
 <template>
   <div class="card-list">
-    <template v-for="(item, index) in movieData" :key="index">
+    <template v-for="item in movieData" :key="item.id">
       <a :href="item.playUrl" alt="Mythrill" target="_blank">
         <div class="card">
           <div class="wrapper">

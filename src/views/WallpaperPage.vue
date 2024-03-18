@@ -19,6 +19,7 @@
       background
       prev-text="上一页"
       next-text="下一页"
+      :pager-count="5"
       :total="total"
       @size-change="handleSizeChange"
       @current-change="handleCurrentChange"
@@ -59,7 +60,7 @@ const topicList = ref<Topic[]>([]);
 const wallpaperList = ref<Wallpaper[]>([]);
 const pagination = reactive<any>({
   pageNum: 1,
-  pageSize: 10,
+  pageSize: 50,
 });
 const loading = ref(true);
 const total = ref(0);

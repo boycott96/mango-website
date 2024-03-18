@@ -79,7 +79,7 @@ function getFileName(url: string) {
 const downloadImage = (url: string) => {
   const path = getFileName(url);
   window.open(
-    `http://download.larkdance.cn/wallpaper/download/${path}`,
+    `https://download.larkdance.cn/wallpaper/download/${path}`,
     "_blank"
   );
 };
