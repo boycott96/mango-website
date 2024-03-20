@@ -46,31 +46,54 @@
       </el-table-column>
     </el-table>
   </div>
-  <el-dialog v-model="dialogFormVisible" title="Shipping address" width="500">
-    <el-form :model="form">
-      <el-form-item label="Promotion name" :label-width="formLabelWidth">
+  <el-dialog v-model="dialogFormVisible" title="修改图片信息" width="500">
+    <el-form :model="form" ref="formRef" :rules="rules" label-width="100px">
+      <el-form-item label="图片名称" prop="name">
         <el-input v-model="form.name" autocomplete="off" />
       </el-form-item>
-      <el-form-item label="Zones" :label-width="formLabelWidth">
-        <el-select v-model="form.region" placeholder="Please select a zone">
-          <el-option label="Zone No.1" value="shanghai" />
-          <el-option label="Zone No.2" value="beijing" />
-        </el-select>
+      <el-form-item label="标签数据" prop="tags">
+        <div class="flex gap-2">
+          <el-tag
+            v-for="tag in form.tags"
+            :key="tag"
+            closable
+            :disable-transitions="false"
+            @close="handleClose(tag)"
+          >
+            {{ tag }}
+          </el-tag>
+          <el-input
+            v-if="inputVisible"
+            ref="InputRef"
+            v-model="inputValue"
+            class="w-20"
+            size="small"
+            @keyup.enter="handleInputConfirm"
+            @blur="handleInputConfirm"
+          />
+          <el-button
+            v-else
+            class="button-new-tag"
+            size="small"
+            @click="showInput"
+          >
+            + New Tag
+          </el-button>
+        </div>
       </el-form-item>
     </el-form>
     <template #footer>
       <div class="dialog-footer">
-        <el-button @click="dialogFormVisible = false">Cancel</el-button>
-        <el-button type="primary" @click="dialogFormVisible = false">
-          Confirm
-        </el-button>
+        <el-button @click="dialogFormVisible = false">取消</el-button>
+        <el-button type="primary" @click="confirm"> 确认 </el-button>
       </div>
     </template>
   </el-dialog>
 </template>
 <script setup lang="ts">
-import { onMounted, reactive, ref } from "vue";
+import { nextTick, onMounted, reactive, ref } from "vue";
 import api from "../api";
+import { ElInput } from "element-plus";
 
 const pagination = reactive<any>({
   pageNum: 1,
@@ -97,15 +120,75 @@ function loadWallpaper() {
 }
 
 // 弹窗
+const handleClose = (tag: string) => {
+  form.tags.splice(form.tags.indexOf(tag), 1);
+};
+const inputValue = ref("");
+const inputVisible = ref(false);
 
-const dialogTableVisible = ref(false);
 const dialogFormVisible = ref(false);
-const formLabelWidth = "140px";
+const formRef = ref();
 
 const form = reactive({
+  id: "",
   name: "",
+  tags: [] as any,
 });
 
-function editRow(row: any) {}
+const rules = reactive({
+  name: [{ required: true, message: "名称不能为空", trigger: "blur" }],
+  tags: [
+    { type: "array", required: true, message: "标签不能为空", trigger: "blur" },
+  ],
+});
+
+const handleInputConfirm = () => {
+  if (inputValue.value) {
+    console.log(inputValue.value);
+    form.tags.push(inputValue.value);
+  }
+  inputVisible.value = false;
+  inputValue.value = "";
+};
+const InputRef = ref<InstanceType<typeof ElInput>>();
+
+const showInput = () => {
+  inputVisible.value = true;
+  nextTick(() => {
+    InputRef.value!.input!.focus();
+  });
+};
+function editRow(row: any) {
+  dialogFormVisible.value = true;
+  form.id = row.id;
+  form.name = row.name;
+  if (row.tags == null || row.tags == undefined) {
+    form.tags = [];
+  } else {
+    form.tags = row.tags;
+  }
+}
 function deleteRow(row: any) {}
+
+async function confirm() {
+  console.log(formRef.value);
+  await formRef.value.validate((valid: any, fields: any) => {
+    if (valid) {
+      dialogFormVisible.value = false;
+
+      console.log("submit!");
+    } else {
+      console.log("error submit!", fields);
+    }
+  });
+}
 </script>
+<style lang="scss" scoped>
+.flex {
+  display: flex;
+}
+.gap-2 {
+  grid-gap: 0.5rem;
+  gap: 0.5rem;
+}
+</style>

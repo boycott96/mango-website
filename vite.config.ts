@@ -21,7 +21,8 @@ export default defineConfig({
     port: 5173,
     proxy: {
       "/api": {
-        target: "https://download.larkdance.cn",
+        // target: "https://download.larkdance.cn",
+        target: "http://localhost:9000",
         changeOrigin: true,
         rewrite: (path) => path.replace(/^\/api/, ""),
       },
