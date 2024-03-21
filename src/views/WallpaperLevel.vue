@@ -46,7 +46,12 @@
       </el-table-column>
     </el-table>
   </div>
-  <el-dialog v-model="dialogFormVisible" title="修改图片信息" width="500">
+  <el-dialog
+    draggable
+    v-model="dialogFormVisible"
+    title="修改图片信息"
+    width="500"
+  >
     <el-form :model="form" ref="formRef" :rules="rules" label-width="100px">
       <el-form-item label="图片名称" prop="name">
         <el-input v-model="form.name" autocomplete="off" />
@@ -175,7 +180,15 @@ async function confirm() {
   await formRef.value.validate((valid: any, fields: any) => {
     if (valid) {
       dialogFormVisible.value = false;
-
+      api
+        .request({
+          url: "/wallpaper/update",
+          method: "put",
+          data: form,
+        })
+        .then((res) => {
+          console.log(res);
+        });
       console.log("submit!");
     } else {
       console.log("error submit!", fields);

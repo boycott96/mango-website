@@ -29,7 +29,9 @@
       </el-menu>
     </el-header>
     <el-main class="view">
-      <RouterView />
+      <div class="view-body">
+        <RouterView />
+      </div>
       <div class="footer">
         <span>©2024</span>
         <span>
@@ -95,8 +97,10 @@ const searchFun = () => {
   flex-grow: 1;
 }
 .view {
-  height: 100vh;
   padding-bottom: 0;
+  .view-body {
+    min-height: calc(100vh - 14vh);
+  }
 }
 .footer {
   margin-top: 12px;

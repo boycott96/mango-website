@@ -22,7 +22,7 @@
       :pager-count="5"
       :total="total"
       @size-change="handleSizeChange"
-      @current-change="handleCurrentChange"
+      @current-change="handleSizeChange"
     />
   </div>
   <div class="wallpaper-body">
@@ -30,6 +30,7 @@
     <template v-else v-for="item in wallpaperList" :key="item.id">
       <el-image
         class="wallpaper"
+        fit="cover"
         :src="item.thumbnail"
         @click="viewImage(item.id)"
       />
@@ -59,9 +60,16 @@ interface Wallpaper {
 const topicList = ref<Topic[]>([]);
 const wallpaperList = ref<Wallpaper[]>([]);
 const pagination = reactive<any>({
-  pageNum: 1,
-  pageSize: 50,
+  pageNum: getPagination(),
+  pageSize: isMobileDevice() ? 10 : 50,
 });
+
+// 判断是否是移动设备
+function isMobileDevice() {
+  return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
+    navigator.userAgent
+  );
+}
 const loading = ref(true);
 const total = ref(0);
 
@@ -98,14 +106,22 @@ function onChangeTopic(topic: Topic) {
  */
 function handleSizeChange(val: number) {
   pagination.pageNum = val;
-  loadWallpaper();
-}
-function handleCurrentChange(val: number) {
-  pagination.pageNum = val;
+  savePagination(val);
   loadWallpaper();
 }
 function viewImage(val: number) {
   router.push(`/wallpaper/${val}`);
+}
+
+// 存储分页数据到 localStorage
+function savePagination(pageNumber: any) {
+  localStorage.setItem("paginationData", pageNumber);
+}
+
+// 从 localStorage 中获取分页数据
+function getPagination() {
+  const data = localStorage.getItem("paginationData");
+  return data ? Number(data) : 1;
 }
 </script>
 <style lang="scss" scoped>
@@ -115,12 +131,16 @@ function viewImage(val: number) {
   gap: 0.5rem;
 }
 .wallpaper-body {
+  display: flex;
+  justify-content: space-between; /* 或者其他合适的对齐方式 */
+  flex-wrap: wrap;
   .wallpaper {
+    flex: 1 0 auto; /* 或者 flex: 1; */
     height: 184px;
-    margin-left: 6px;
-    margin-right: 5px;
     cursor: pointer;
     border-radius: 12px;
+    /* 使内容div自适应宽度 */
+    margin: 5px;
   }
   .wallpaper:hover {
     background-color: rgba(0, 0, 0, 0.03);

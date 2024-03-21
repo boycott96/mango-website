@@ -16,7 +16,7 @@
     }}</el-descriptions-item>
   </el-descriptions>
   <div>
-    <el-image :src="wallpaper.path" lazy />
+    <el-image :src="wallpaper.path" loading="lazy" />
   </div>
 </template>
 
