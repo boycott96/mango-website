@@ -36,6 +36,7 @@
       />
     </template>
   </div>
+  <el-backtop target=".app-main-scroll-wrap" />
 </template>
 
 <script lang="ts" setup>

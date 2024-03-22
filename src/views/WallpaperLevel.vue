@@ -4,13 +4,17 @@
       <el-table-column
         prop="name"
         label="名称"
-        width="260"
+        width="120"
         show-overflow-tooltip
       />
-      <el-table-column prop="fileType" label="图片类型" width="120" />
-      <el-table-column prop="fileSize" label="图片大小" width="120" />
-      <el-table-column prop="level" label="等级" width="120" />
+      <el-table-column
+        prop="tags"
+        label="标签"
+        width="120"
+        show-overflow-tooltip
+      />
       <el-table-column prop="resolution" label="分辨率" width="120" />
+      <el-table-column prop="level" label="等级" width="120" />
       <el-table-column label="预览" width="120">
         <template #default="scope">
           <el-image
@@ -26,7 +30,7 @@
         </template>
       </el-table-column>
 
-      <el-table-column fixed="right" label="操作">
+      <el-table-column fixed="right" label="操作" width="120">
         <template #default="scope">
           <el-button
             link
@@ -50,7 +54,7 @@
     draggable
     v-model="dialogFormVisible"
     title="修改图片信息"
-    width="500"
+    width="390"
   >
     <el-form :model="form" ref="formRef" :rules="rules" label-width="100px">
       <el-form-item label="图片名称" prop="name">
