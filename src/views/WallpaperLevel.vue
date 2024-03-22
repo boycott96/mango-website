@@ -113,7 +113,7 @@ onMounted(() => {
 function loadWallpaper() {
   api
     .request({
-      url: "/wallpaper/page",
+      url: "/wallpaper/inner/page",
       method: "get",
       params: pagination,
     })
@@ -138,6 +138,7 @@ const form = reactive({
   id: "",
   name: "",
   tags: [] as any,
+  level: "",
 });
 
 const rules = reactive({
@@ -167,13 +168,16 @@ function editRow(row: any) {
   dialogFormVisible.value = true;
   form.id = row.id;
   form.name = row.name;
+  form.level = row.level;
   if (row.tags == null || row.tags == undefined) {
     form.tags = [];
   } else {
     form.tags = row.tags;
   }
 }
-function deleteRow(row: any) {}
+function deleteRow(row: any) {
+  console.log(row);
+}
 
 async function confirm() {
   console.log(formRef.value);
