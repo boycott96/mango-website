@@ -1,5 +1,24 @@
 <template>
   <div>
+    <el-pagination
+      v-model:current-page="pagination.pageNum"
+      :page-size="pagination.pageSize"
+      layout="prev, pager, next"
+      background
+      prev-text="上一页"
+      next-text="下一页"
+      :pager-count="5"
+      :total="total"
+      @size-change="handleSizeChange"
+      @current-change="handleSizeChange"
+    />
+    <div class="level-group">
+      <el-radio-group v-model="pagination.level">
+        <template v-for="item in 6" :key="item">
+          <el-radio-button :label="`L${item - 1}`" :value="item - 1" />
+        </template>
+      </el-radio-group>
+    </div>
     <el-table :data="dataList" style="width: 100%">
       <el-table-column
         prop="name"
@@ -15,7 +34,7 @@
       />
       <el-table-column prop="resolution" label="分辨率" width="120" />
       <el-table-column prop="level" label="等级" width="120" />
-      <el-table-column label="预览" width="120">
+      <el-table-column label="预览" width="80">
         <template #default="scope">
           <el-image
             :src="scope.row.thumbnail"
@@ -30,7 +49,7 @@
         </template>
       </el-table-column>
 
-      <el-table-column fixed="right" label="操作" width="120">
+      <el-table-column fixed="right" label="操作" width="140">
         <template #default="scope">
           <el-button
             link
@@ -39,6 +58,20 @@
             @click="editRow(scope.row)"
             >编辑</el-button
           >
+          <span />
+          <el-button
+            link
+            type="primary"
+            size="small"
+            @click="shareRow(scope.row)"
+            >分享</el-button
+          >
+          <input
+            type="text"
+            ref="shareInput"
+            :value="shareUrl"
+            style="display: none"
+          />
           <el-button
             link
             type="danger"
@@ -86,7 +119,7 @@
             size="small"
             @click="showInput"
           >
-            + New Tag
+            + 新标签
           </el-button>
         </div>
       </el-form-item>
@@ -105,6 +138,7 @@ import api from "../api";
 import { ElInput } from "element-plus";
 
 const pagination = reactive<any>({
+  level: "",
   pageNum: 1,
   pageSize: 10,
 });
@@ -113,6 +147,13 @@ const total = ref(0);
 onMounted(() => {
   loadWallpaper();
 });
+const shareUrl = ref("");
+const shareInput = ref();
+
+function shareRow(obj: any) {
+  shareUrl.value = obj.path;
+  copyContent(shareUrl.value);
+}
 
 function loadWallpaper() {
   api
@@ -194,14 +235,76 @@ async function confirm() {
           method: "put",
           data: form,
         })
-        .then((res) => {
-          console.log(res);
+        .then(() => {
+          loadWallpaper();
         });
       console.log("submit!");
     } else {
       console.log("error submit!", fields);
     }
   });
+}
+
+// 复制文本内容方法一
+async function copyContent(content: string) {
+  // 复制结果
+  let copyResult = true;
+  // 设置想要复制的文本内容
+  const text = content || "复制内容为空哦~";
+  // 判断是否支持clipboard方式
+  if (window.navigator.clipboard) {
+    // 利用clipboard将文本写入剪贴板（这是一个异步promise）
+    await window.navigator.clipboard
+      .writeText(text)
+      .then()
+      .catch((err) => {
+        console.log("复制失败--采取第二种复制方案", err);
+        // clipboard方式复制失败 则采用document.execCommand()方式进行尝试
+        copyResult = copyContent2(text);
+      });
+  } else {
+    // 不支持clipboard方式 则采用document.execCommand()方式
+    copyResult = copyContent2(text);
+  }
+  // 返回复制操作的最终结果
+  return copyResult;
+}
+// 复制文本内容方法二
+function copyContent2(text: string) {
+  // 复制结果
+  let copyResult = true;
+  // 创建一个input元素
+  let inputDom = document.createElement("textarea");
+  // 设置为只读 防止移动端手机上弹出软键盘
+  inputDom.setAttribute("readonly", "readonly");
+  // 给input元素赋值
+  inputDom.value = text;
+  // 将创建的input添加到body
+  document.body.appendChild(inputDom);
+  // 选中input元素的内容
+  inputDom.select();
+  // 执行浏览器复制命令
+  // 复制命令会将当前选中的内容复制到剪切板中（这里就是创建的input标签中的内容）
+  // Input要在正常的编辑状态下原生复制方法才会生效
+  const result = document.execCommand("copy");
+  // 判断是否复制成功
+  if (result) {
+    console.log(result);
+  } else {
+    console.error("无法复制到剪贴板: ");
+    copyResult = false;
+  }
+  // 复制操作后再将构造的标签 移除
+  document.body.removeChild(inputDom);
+  // 返回复制操作的最终结果
+  return copyResult;
+}
+/**
+ * 分页
+ */
+function handleSizeChange(val: number) {
+  pagination.pageNum = val;
+  loadWallpaper();
 }
 </script>
 <style lang="scss" scoped>
@@ -211,5 +314,10 @@ async function confirm() {
 .gap-2 {
   grid-gap: 0.5rem;
   gap: 0.5rem;
+}
+.level-group {
+  margin: 6px 0;
+  display: flex;
+  justify-content: right;
 }
 </style>
