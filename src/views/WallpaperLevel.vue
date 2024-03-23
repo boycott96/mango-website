@@ -13,7 +13,7 @@
       @current-change="handleSizeChange"
     />
     <div class="level-group">
-      <el-radio-group v-model="pagination.level">
+      <el-radio-group v-model="pagination.level" @change="loadWallpaper">
         <template v-for="item in 6" :key="item">
           <el-radio-button :label="`L${item - 1}`" :value="item - 1" />
         </template>
@@ -138,7 +138,7 @@ import api from "../api";
 import { ElInput } from "element-plus";
 
 const pagination = reactive<any>({
-  level: "",
+  level: 0,
   pageNum: 1,
   pageSize: 10,
 });
@@ -183,7 +183,7 @@ const form = reactive({
   id: "",
   name: "",
   tags: [] as any,
-  level: "",
+  level: 0,
 });
 
 const rules = reactive({
@@ -225,10 +225,10 @@ function deleteRow(row: any) {
 }
 
 async function confirm() {
-  console.log(formRef.value);
   await formRef.value.validate((valid: any, fields: any) => {
     if (valid) {
       dialogFormVisible.value = false;
+      form.level = Number(form.level) + 1;
       api
         .request({
           url: "/wallpaper/update",
