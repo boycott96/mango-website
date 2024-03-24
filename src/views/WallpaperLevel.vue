@@ -221,7 +221,14 @@ function editRow(row: any) {
   }
 }
 function deleteRow(row: any) {
-  console.log(row);
+  api
+    .request({
+      url: `/wallpaper/delete/${row.id}`,
+      method: "delete",
+    })
+    .then(() => {
+      loadWallpaper();
+    });
 }
 
 async function confirm() {
