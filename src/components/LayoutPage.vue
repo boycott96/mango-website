@@ -5,6 +5,7 @@
         :default-active="activeIndex"
         class="el-menu-demo"
         mode="horizontal"
+        router
         :ellipsis="false"
         @select="handleSelect"
       >
@@ -15,8 +16,8 @@
             alt="Element logo"
           />
         </div>
-        <el-menu-item index="music">音乐馆</el-menu-item>
-        <el-menu-item index="wallpaper">壁纸</el-menu-item>
+        <el-menu-item index="/music">音乐馆</el-menu-item>
+        <el-menu-item index="/wallpaper">壁纸</el-menu-item>
         <div class="flex-grow" />
         <div class="search" v-if="false">
           <el-input
@@ -52,16 +53,30 @@
 </template>
 
 <script lang="ts" setup>
-import { ref } from "vue";
+import { onMounted, ref, watch } from "vue";
 import { Search } from "@element-plus/icons-vue";
 import { useRouter } from "vue-router";
 
 const activeIndex = ref("music");
-const handleSelect = (key: string, _keyPath: string[]) => {
-  router.push({ name: key });
+const router = useRouter();
+
+onMounted(() => {
+  updateActiveIndex();
+  watch(router.currentRoute, updateActiveIndex);
+});
+
+/**
+ * 更新默认路由
+ */
+const updateActiveIndex = () => {
+  activeIndex.value = router.currentRoute.value.path;
+  console.log(activeIndex.value);
 };
 
-const router = useRouter();
+const handleSelect = (key: string, _keyPath: string[]) => {
+  router.push(key);
+};
+
 const homeClick = () => {
   router.push("/home");
 };
