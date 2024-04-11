@@ -30,22 +30,24 @@
         </div>
       </el-menu>
     </el-header>
-    <el-main class="view">
-      <div class="view-body">
-        <RouterView />
-      </div>
-      <div class="footer">
-        <div class="icp">
-          <span>©2024</span>
-          <span>
-            ICP证:
-            <a href="https://beian.miit.gov.cn/" target="_blank"
-              >皖ICP备20002653号-2</a
-            >
-          </span>
+    <el-scrollbar wrap-class="app-main-scroll-wrap">
+      <el-main class="view">
+        <div class="view-body">
+          <RouterView />
         </div>
-      </div>
-    </el-main>
+        <div class="footer">
+          <div class="icp">
+            <span>©2024</span>
+            <span>
+              ICP证:
+              <a href="https://beian.miit.gov.cn/" target="_blank"
+                >皖ICP备20002653号-2</a
+              >
+            </span>
+          </div>
+        </div>
+      </el-main>
+    </el-scrollbar>
   </el-container>
 </template>
 

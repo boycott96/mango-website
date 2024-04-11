@@ -7,5 +7,12 @@ const router = createRouter({
   // @ts-ignore
   routes,
 });
+router.afterEach(() => {
+  const scrollContainer = document.querySelector('.el-scrollbar__wrap')
+  if (scrollContainer) {
+    scrollContainer.scrollTo({ top: 0 })
+  }
+});
+
 // 导出router
 export default router;
