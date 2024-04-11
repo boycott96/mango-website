@@ -15,6 +15,8 @@
             alt="Element logo"
           />
         </div>
+        <el-menu-item index="music">音乐馆</el-menu-item>
+        <el-menu-item index="wallpaper">壁纸</el-menu-item>
         <div class="flex-grow" />
         <div class="search" v-if="false">
           <el-input
@@ -33,13 +35,15 @@
         <RouterView />
       </div>
       <div class="footer">
-        <span>©2024</span>
-        <span>
-          ICP证:
-          <a href="https://beian.miit.gov.cn/" target="_blank"
-            >皖ICP备20002653号-2</a
-          >
-        </span>
+        <div class="icp">
+          <span>©2024</span>
+          <span>
+            ICP证:
+            <a href="https://beian.miit.gov.cn/" target="_blank"
+              >皖ICP备20002653号-2</a
+            >
+          </span>
+        </div>
       </div>
     </el-main>
   </el-container>
@@ -50,9 +54,9 @@ import { ref } from "vue";
 import { Search } from "@element-plus/icons-vue";
 import { useRouter } from "vue-router";
 
-const activeIndex = ref("1");
-const handleSelect = (key: string, keyPath: string[]) => {
-  console.log(key, keyPath);
+const activeIndex = ref("music");
+const handleSelect = (key: string, _keyPath: string[]) => {
+  router.push({ name: key });
 };
 
 const router = useRouter();
@@ -97,18 +101,27 @@ const searchFun = () => {
   flex-grow: 1;
 }
 .view {
-  padding-bottom: 0;
+  padding: 0;
+
   .view-body {
-    min-height: calc(100vh - 14vh);
+    .container {
+      padding: 20px 20px 32px 20px;
+    }
   }
 }
 .footer {
-  margin-top: 12px;
-  text-align: center;
-  font-size: 14px;
-  height: 32px;
-  span + span {
-    margin-left: 10px;
+  position: relative;
+  .icp {
+    position: absolute;
+    width: 100%;
+    bottom: 0;
+    margin-top: 12px;
+    text-align: center;
+    font-size: 14px;
+    height: 32px;
+    span + span {
+      margin-left: 10px;
+    }
   }
 }
 </style>

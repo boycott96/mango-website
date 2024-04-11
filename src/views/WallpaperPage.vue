@@ -1,40 +1,42 @@
 <template>
-  <div class="topic-row">
-    <template v-for="item in topicList" :key="item.id">
-      <el-check-tag
-        class="topic"
-        :checked="item.value"
-        type="primary"
-        @change="onChangeTopic(item)"
-      >
-        #{{ item.topic }}
-      </el-check-tag>
-    </template>
-  </div>
-  <div class="pagination">
-    <el-pagination
-      v-model:current-page="pagination.pageNum"
-      :page-size="pagination.pageSize"
-      layout="prev, pager, next"
-      background
-      prev-text="上一页"
-      next-text="下一页"
-      :pager-count="5"
-      :total="total"
-      @size-change="handleSizeChange"
-      @current-change="handleSizeChange"
-    />
-  </div>
-  <div class="wallpaper-body">
-    <el-skeleton v-if="loading" :rows="10" />
-    <template v-else v-for="item in wallpaperList" :key="item.id">
-      <el-image
-        class="wallpaper"
-        fit="cover"
-        :src="item.thumbnail"
-        @click="viewImage(item.id)"
+  <div class="container">
+    <div class="topic-row">
+      <template v-for="item in topicList" :key="item.id">
+        <el-check-tag
+          class="topic"
+          :checked="item.value"
+          type="primary"
+          @change="onChangeTopic(item)"
+        >
+          #{{ item.topic }}
+        </el-check-tag>
+      </template>
+    </div>
+    <div class="pagination">
+      <el-pagination
+        v-model:current-page="pagination.pageNum"
+        :page-size="pagination.pageSize"
+        layout="prev, pager, next"
+        background
+        prev-text="上一页"
+        next-text="下一页"
+        :pager-count="5"
+        :total="total"
+        @size-change="handleSizeChange"
+        @current-change="handleSizeChange"
       />
-    </template>
+    </div>
+    <div class="wallpaper-body">
+      <el-skeleton v-if="loading" :rows="10" />
+      <template v-else v-for="item in wallpaperList" :key="item.id">
+        <el-image
+          class="wallpaper"
+          fit="cover"
+          :src="item.thumbnail"
+          @click="viewImage(item.id)"
+        />
+      </template>
+    </div>
   </div>
 </template>
 
