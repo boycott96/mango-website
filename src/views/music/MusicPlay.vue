@@ -164,7 +164,7 @@ const activeIndex = ref();
     }
   }
   .play-bar {
-    width: 540px;
+    width: 700px;
     position: relative;
   }
 }

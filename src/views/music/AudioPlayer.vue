@@ -98,12 +98,7 @@ const handleAudioVolume = (val: any) => {
 
 <template>
   <div class="audio-container">
-    <audio
-      @timeupdate="updateProgress"
-      controls
-      ref="audioRef"
-      style="display: none"
-    >
+    <audio @timeupdate="updateProgress" controls ref="audioRef" style="display: none">
       <source :src="audioUrl" type="audio/mpeg" />
     </audio>
     <div class="audio-left">
@@ -149,14 +144,28 @@ const handleAudioVolume = (val: any) => {
     <div class="audio-body">
       <div class="body-top">
         <div class="song-picture">
-          <img
-            src="https://y.qq.com/music/photo_new/T002R300x300M000001odpSE070a4f_1.jpg?max_age=2592000"
-          />
+          <img src="https://y.qq.com/music/photo_new/T002R300x300M000001odpSE070a4f_1.jpg?max_age=2592000" />
         </div>
         <div class="song-desc">
           <div class="title">Meltdown Mendy</div>
           <div class="songer">Niall Horan</div>
         </div>
+        <div class="song-opertion">
+          <div class="small-btn">
+            <svg-icon iconName="repeat"></svg-icon>
+          </div>
+          <div class="small-btn">
+            <svg-icon iconName="more"></svg-icon>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="audio-right">
+      <div class="audio-btn">
+        <svg-icon iconName="portrait"></svg-icon>
+      </div>
+      <div class="audio-btn">
+        <svg-icon iconName="speaker_wave"></svg-icon>
       </div>
     </div>
   </div>
@@ -164,23 +173,23 @@ const handleAudioVolume = (val: any) => {
 
 <style lang="scss" scoped>
 .audio-container {
-  width: 540px;
   background-color: rgba(255, 255, 255, 0.4);
   border-radius: 100px;
-  padding: 20px 10px;
+  padding: 10px;
   position: absolute;
   top: -30px;
   display: flex;
+
   .audio-left {
     display: flex;
-    .svg-icon {
-      width: 31px;
-      height: 31px;
-    }
   }
+
   .audio-body {
+    background-color: rgba(0, 0, 0, 0.14);
+    border-radius: 12px;
     .body-top {
       display: flex;
+
       .song-picture {
         img {
           width: 50px;
@@ -188,14 +197,69 @@ const handleAudioVolume = (val: any) => {
           border-radius: 8px;
         }
       }
+
+      .song-desc {
+        margin-left: 12px;
+        width: 200px;
+
+        .title {
+          color: white;
+          width: 200px;
+          white-space: nowrap;
+          /* 不换行 */
+          overflow: hidden;
+          /* 超出部分隐藏 */
+          text-overflow: ellipsis;
+          /* 显示省略号 */
+        }
+
+        .songer {
+          color: rgba(255, 255, 255, 0.44);
+          width: 200px;
+          white-space: nowrap;
+          /* 不换行 */
+          overflow: hidden;
+          /* 超出部分隐藏 */
+          text-overflow: ellipsis;
+          /* 显示省略号 */
+        }
+      }
+
+      .song-opertion {
+        display: flex;
+        align-items: center;
+        
+        .small-btn {
+          .svg-icon {
+            display: flex;
+            align-items: center;
+            padding: 12px;
+            width: 24px;
+            height: 24px;
+          }
+        }
+      }
     }
   }
+
+  .audio-right {
+    display: flex;
+    margin-left: 26px;
+  }
+
   .audio-btn {
     padding: 12px;
     cursor: pointer;
+
+    .svg-icon {
+      width: 28px;
+      height: 28px;
+    }
+
     // border: 1px solid red;
   }
-  .audio-btn + .audio-btn {
+
+  .audio-btn+.audio-btn {
     margin-left: 12px;
   }
 }
