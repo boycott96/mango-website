@@ -18,14 +18,36 @@ const routers = [
   },
   // 音乐榜
   {
-    name: 'music',
+    name: "music",
     path: "/music",
     component: () => import("../views/music/MusicPage.vue"),
+    children: [
+      {
+        path: "play",
+        component: () => import("../views/music/MusicPlay.vue"),
+      },
+      {
+        path: "hall",
+        component: () => import("../views/music/MusicHall.vue"),
+      },
+      {
+        path: "search",
+        component: () => import("../views/music/MusicSearch.vue"),
+      },
+      {
+        path: "local",
+        component: () => import("../views/music/MusicLocal.vue"),
+      },
+      {
+        path: "radar",
+        component: () => import("../views/music/MusicRadar.vue"),
+      },
+      {
+        path: "songlist",
+        component: () => import("../views/music/SongList.vue"),
+      },
+    ],
   },
-
-
-
-
   {
     path: "/GLg8YqDmDuP3QUSuqJUgu5gX4bGqg10w",
     component: () => import("../views/WallpaperLevel.vue"),
