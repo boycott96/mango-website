@@ -18,5 +18,6 @@ import { defineComponent, computed } from 'vue'
   height: 1em;
   fill: currentColor;
   vertical-align: middle;
+  color: white;
 }
 </style>

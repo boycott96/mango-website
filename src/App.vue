@@ -1,10 +1,5 @@
-<script lang="ts" setup>
-import LayoutPage from "./components/LayoutPage.vue";
-</script>
-
 <template>
-  <LayoutPage />
+  <RouterView />
 </template>
 
-<style scoped>
-</style>
+<style scoped></style>

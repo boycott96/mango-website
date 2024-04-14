@@ -174,10 +174,10 @@ const handleAudioVolume = (val: any) => {
 <style lang="scss" scoped>
 .audio-container {
   background-color: rgba(255, 255, 255, 0.4);
-  border-radius: 100px;
-  padding: 10px;
+  border-radius: 10vw;
+  padding: 0.725vw;
   position: absolute;
-  top: -30px;
+  top: -2.275vw;
   display: flex;
 
   .audio-left {
@@ -186,25 +186,25 @@ const handleAudioVolume = (val: any) => {
 
   .audio-body {
     background-color: rgba(0, 0, 0, 0.14);
-    border-radius: 12px;
+    border-radius: 0.5vw;
     .body-top {
       display: flex;
 
       .song-picture {
         img {
-          width: 50px;
-          height: 50px;
-          border-radius: 8px;
+          width: 2.275vw;
+          height: 2.275vw;
+          border-radius: 0.5vw;
         }
       }
 
       .song-desc {
-        margin-left: 12px;
-        width: 200px;
+        margin-left: 1vw;
+        width: 16vw;
 
         .title {
           color: white;
-          width: 200px;
+          width: 16vw;
           white-space: nowrap;
           /* 不换行 */
           overflow: hidden;
@@ -215,7 +215,7 @@ const handleAudioVolume = (val: any) => {
 
         .songer {
           color: rgba(255, 255, 255, 0.44);
-          width: 200px;
+          width: 16vw;
           white-space: nowrap;
           /* 不换行 */
           overflow: hidden;
@@ -233,9 +233,9 @@ const handleAudioVolume = (val: any) => {
           .svg-icon {
             display: flex;
             align-items: center;
-            padding: 12px;
-            width: 24px;
-            height: 24px;
+            padding: 1vw;
+            width: 1vw;
+            height: 1vw;
           }
         }
       }
@@ -244,23 +244,23 @@ const handleAudioVolume = (val: any) => {
 
   .audio-right {
     display: flex;
-    margin-left: 26px;
+    margin-left: 1.5vw;
   }
 
   .audio-btn {
-    padding: 12px;
+    padding: 0.5vw;
     cursor: pointer;
 
     .svg-icon {
-      width: 28px;
-      height: 28px;
+      width: 1.5vw;
+      height: 1.5vw;
     }
 
     // border: 1px solid red;
   }
 
   .audio-btn+.audio-btn {
-    margin-left: 12px;
+    margin-left: 0.725vw;
   }
 }
 </style>

@@ -315,9 +315,6 @@ function handleSizeChange(val: number) {
 }
 </script>
 <style lang="scss" scoped>
-.flex {
-  display: flex;
-}
 .gap-2 {
   grid-gap: 0.5rem;
   gap: 0.5rem;

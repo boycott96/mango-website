@@ -57,7 +57,7 @@ import { onMounted, ref, watch } from "vue";
 import { Search } from "@element-plus/icons-vue";
 import { useRouter } from "vue-router";
 
-const activeIndex = ref("music");
+const activeIndex = ref("/music");
 const router = useRouter();
 
 onMounted(() => {
@@ -69,8 +69,18 @@ onMounted(() => {
  * 更新默认路由
  */
 const updateActiveIndex = () => {
-  activeIndex.value = router.currentRoute.value.path;
-  console.log(activeIndex.value);
+  // 使用正则表达式匹配斜杠
+  const str = router.currentRoute.value.path;
+
+  var matches = str.match(/\//g);
+
+  // 如果至少有两个斜杠，则获取第二个斜杠的位置
+  if (matches && matches.length >= 2) {
+    var secondSlashIndex = str.indexOf("/", str.indexOf("/") + 1);
+    activeIndex.value = str.substring(0, secondSlashIndex);
+  } else {
+    activeIndex.value = router.currentRoute.value.path;
+  }
 };
 
 const handleSelect = (key: string, _keyPath: string[]) => {
@@ -129,13 +139,16 @@ const searchFun = () => {
 .footer {
   position: relative;
   .icp {
+    min-width: 1024px;
     position: absolute;
+    background-color: white;
+    text-align: center;
     width: 100%;
     bottom: 0;
     margin-top: 12px;
-    text-align: center;
     font-size: 14px;
     height: 32px;
+    line-height: 32px;
     span + span {
       margin-left: 10px;
     }
