@@ -1,7 +1,7 @@
 const routers = [
   {
     path: "/",
-    redirect: "/music",
+    redirect: "/mango",
   },
 
   {
@@ -16,6 +16,10 @@ const routers = [
     component: () => import("../components/LayoutPage.vue"),
     children: [
       // 壁纸榜
+      {
+        path: "",
+        redirect: "/mango/wallpaper",
+      },
       {
         name: "wallpaper",
         path: "wallpaper",

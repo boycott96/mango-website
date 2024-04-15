@@ -16,8 +16,8 @@
             alt="Element logo"
           />
         </div>
-        <el-menu-item index="/music">音乐馆</el-menu-item>
-        <el-menu-item index="/wallpaper">壁纸</el-menu-item>
+        <el-menu-item index="/mango/music">音乐馆</el-menu-item>
+        <el-menu-item index="/mango/wallpaper">壁纸</el-menu-item>
         <div class="flex-grow" />
         <div class="search" v-if="false">
           <el-input
@@ -75,8 +75,8 @@ const updateActiveIndex = () => {
   var matches = str.match(/\//g);
 
   // 如果至少有两个斜杠，则获取第二个斜杠的位置
-  if (matches && matches.length >= 2) {
-    var secondSlashIndex = str.indexOf("/", str.indexOf("/") + 1);
+  if (matches && matches.length >= 3) {
+    var secondSlashIndex = str.indexOf("/", str.indexOf("/", str.indexOf("/") + 1) + 1);
     activeIndex.value = str.substring(0, secondSlashIndex);
   } else {
     activeIndex.value = router.currentRoute.value.path;
