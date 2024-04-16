@@ -1,5 +1,6 @@
 <script lang="ts" setup>
 import { reactive } from "vue";
+import { useNotify } from "../hooks/message";
 
 const signUpClick = () => {
   const container = document.querySelector(".container") as any;
@@ -14,13 +15,14 @@ const signInClick = () => {
 const registerForm = reactive({
   username: "",
   email: "",
-  code: "",
+  invitingCode: "",
   password: "",
 });
 const submitSignUp = () => {
   if (!registerForm.username || !registerForm.username.trim()) {
-    console.log(registerForm);
+    useNotify().error("注册提示", "用户名不能为空");
   }
+  return;
 };
 </script>
 <template>
@@ -43,7 +45,7 @@ const submitSignUp = () => {
             </div>
             <input type="submit" value="登陆" class="btn solid" />
           </form>
-          <form class="sign-up-form">
+          <form class="sign-up-form" @submit.prevent="submitSignUp">
             <div class="input-field">
               <span class="prefix">
                 <svg-icon iconName="user"></svg-icon>
@@ -66,6 +68,16 @@ const submitSignUp = () => {
             </div>
             <div class="input-field">
               <span class="prefix">
+                <svg-icon iconName="number"></svg-icon>
+              </span>
+              <input
+                v-model="registerForm.invitingCode"
+                type="text"
+                placeholder="邀请码"
+              />
+            </div>
+            <div class="input-field">
+              <span class="prefix">
                 <svg-icon iconName="password"></svg-icon>
               </span>
               <input
@@ -74,12 +86,7 @@ const submitSignUp = () => {
                 placeholder="密码"
               />
             </div>
-            <input
-              type="submit"
-              @click="submitSignUp"
-              class="btn"
-              value="确认注册"
-            />
+            <input type="submit" class="btn" value="确认注册" />
           </form>
         </div>
       </div>
@@ -120,8 +127,6 @@ const submitSignUp = () => {
   </body>
 </template>
 <style scoped lang="scss">
-@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700;800&display=swap");
-
 .container {
   position: relative;
   width: 100%;
@@ -200,7 +205,6 @@ form.sign-in-form {
     width: 25px;
   }
 }
-
 
 .code-btn {
   position: relative;

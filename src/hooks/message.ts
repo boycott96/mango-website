@@ -21,6 +21,7 @@ export function useNotify() {
         title: title,
         message: message,
         type: "info",
+        duration: 0,
       });
     }
     wraning(title: string, message: string): void {
@@ -28,6 +29,7 @@ export function useNotify() {
         title: title,
         message: message,
         type: "info",
+        duration: 0,
       });
     }
     success(title: string, message: string): void {
@@ -35,6 +37,7 @@ export function useNotify() {
         title: title,
         message: message,
         type: "info",
+        duration: 0,
       });
     }
     error(title: string, message: string): void {
@@ -42,6 +45,7 @@ export function useNotify() {
         title: title,
         message: message,
         type: "info",
+        duration: 0,
       });
     }
   }
