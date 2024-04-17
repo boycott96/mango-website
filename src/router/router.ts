@@ -64,10 +64,6 @@ const routers = [
           },
         ],
       },
-      {
-        path: "/GLg8YqDmDuP3QUSuqJUgu5gX4bGqg10w",
-        component: () => import("../views/WallpaperLevel.vue"),
-      },
     ],
   },
 ];
