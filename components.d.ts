@@ -22,6 +22,7 @@ declare module 'vue' {
     ElPagination: typeof import('element-plus/es')['ElPagination']
     ElScrollbar: typeof import('element-plus/es')['ElScrollbar']
     ElSkeleton: typeof import('element-plus/es')['ElSkeleton']
+    HlsVideo: typeof import('./src/components/HlsVideo.vue')['default']
     LayoutPage: typeof import('./src/components/LayoutPage.vue')['default']
     MovieList: typeof import('./src/components/MovieList.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']

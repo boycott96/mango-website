@@ -1,3 +1,7 @@
+import VideoView from '../views/VideoView.vue'
+
+
+
 const routers = [
   {
     path: "/",
@@ -9,7 +13,12 @@ const routers = [
     name: "sign",
     component: () => import("../views/SignIn.vue"),
   },
-
+  {
+    path: '/share/video',
+    name: 'ShareVideo',
+    component: VideoView
+  }
+  ,
   {
     path: "/mango",
     name: "mango",
