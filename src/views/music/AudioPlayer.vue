@@ -8,8 +8,8 @@ const audioIsPlay = ref(true); //音频是否在播放
 const audioStart = ref("0:00");
 const durationTime = ref("0:00"); //音频的总时长，显示的时间格式
 const duration = ref(0); //音频的总时长
-const audioVolume = ref(80); //音量的默认值是0.8
-const audioHuds = ref(false); //是否显示音量slider
+// const audioVolume = ref(80); //音量的默认值是0.8
+// const audioHuds = ref(false); //是否显示音量slider
 const audioRef = ref(null) as any;
 const currentProgress = ref(0);
 
@@ -81,19 +81,19 @@ function updateProgress(e: any) {
   }
 }
 //调整播放进度
-const handleProgressChange = (val: any) => {
-  console.log(val);
-  if (!val) {
-    return;
-  }
-  let currentTime = duration.value * (val / 100);
-  // 更新音频的当前播放时间
-  audioRef.value.currentTime = currentTime;
-};
+// const handleProgressChange = (val: any) => {
+//   console.log(val);
+//   if (!val) {
+//     return;
+//   }
+//   let currentTime = duration.value * (val / 100);
+//   // 更新音频的当前播放时间
+//   audioRef.value.currentTime = currentTime;
+// };
 //调整音量
-const handleAudioVolume = (val: any) => {
-  audioRef.value.volume = val / 100;
-};
+// const handleAudioVolume = (val: any) => {
+//   audioRef.value.volume = val / 100;
+// };
 </script>
 
 <template>

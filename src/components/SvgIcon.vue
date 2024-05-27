@@ -6,8 +6,7 @@
     </svg>
 </template>
  
-<script setup>
-import { defineComponent, computed } from 'vue'
+<script lang="ts" setup>
 // 可以打印所有注册的svg图标
 // import ids from 'virtual:svg-icons-names'
  
