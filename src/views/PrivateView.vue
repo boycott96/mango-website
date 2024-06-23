@@ -4,22 +4,15 @@
       class="carousel-inner"
       :style="{ transform: `translateX(-${currentIndex * 100}%)` }"
     >
-      <div
-        class="carousel-item"
-        v-for="item in number"
-        :key="item"
-      >
-        <img
-          :src="`https://wp.larkdance.cn/file/private/${item}.jpg`"
-          :alt="item"
-        />
+      <div class="carousel-item" v-for="item in number" :key="item">
+        <img :src="`https://wp.larkdance.cn/file/private/${item}.jpg`" />
       </div>
     </div>
     <button class="prev" @click="prevSlide">Prev</button>
     <button class="next" @click="nextSlide">Next</button>
   </div>
 </template>
-<script setup>
+<script setup lang="ts">
 import { ref, onMounted } from "vue";
 const currentIndex = ref(0);
 const number = ref(0);
