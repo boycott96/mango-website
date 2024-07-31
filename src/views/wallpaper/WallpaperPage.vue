@@ -42,7 +42,7 @@
 </template>
 
 <script lang="ts" setup>
-import api from "../api";
+import api from "../../api";
 import { onMounted, reactive, ref } from "vue";
 import { useRouter } from "vue-router";
 

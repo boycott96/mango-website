@@ -16,8 +16,8 @@
             alt="Element logo"
           />
         </div>
-        <el-menu-item index="/mango/music">音乐馆</el-menu-item>
-        <el-menu-item index="/mango/wallpaper">壁纸</el-menu-item>
+        <el-menu-item index="/mango/doc">文档</el-menu-item>
+        <!-- <el-menu-item index="/mango/wallpaper">壁纸</el-menu-item> -->
         <div class="flex-grow" />
         <div class="search" v-if="false">
           <el-input

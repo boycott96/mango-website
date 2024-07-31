@@ -22,7 +22,7 @@
 
 <script lang="ts" setup>
 import { onMounted, ref } from "vue";
-import api from "../api";
+import api from "../../api";
 const props = defineProps({
   wallpaperId: {
     type: String,
