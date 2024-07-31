@@ -1,4 +1,5 @@
 import VideoView from "../views/VideoView.vue";
+import PrivateView from "../views/PrivateView.vue";
 
 const routers = [
   {
@@ -15,6 +16,11 @@ const routers = [
     path: "/share/video",
     name: "ShareVideo",
     component: VideoView,
+  },
+  {
+    path: "/share/private",
+    name: "ShareWp",
+    component: PrivateView,
   },
   {
     path: "/mango",
